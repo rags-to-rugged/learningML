@@ -1,0 +1,6 @@
+HackerRank: https://www.hackerrank.com/dashboard
+Machine Learning by Andrew NG - https://www.youtube.com/watch?v=PPLop4L2eGk&list=PLLssT5z_DsK-h9vYZkQkYNWcItqhlRJLN
+AI: All in one channel - https://www.youtube.com/channel/UC5zx8Owijmv-bbhAK6Z9apg/featured
+Coursera Deep Learning Specialization - https://www.coursera.org/specializations/deep-learning#courses
+Coursera Tensorflow Specialization - https://www.coursera.org/specializations/tensorflow-in-practice#courses
+Kaggle Courses - https://www.kaggle.com/learn/overview

@@ -1,0 +1,80 @@
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import os
+print(os.listdir("../input"))
+wine = pd.read_csv('../input/wine_dataset.csv')
+wine.columns
+wine.describe()
+wine.describe(include = ['O'])
+wine.quality.plot(kind = 'hist')
+
+plt.hist(wine.quality, bins = 10, histtype = 'bar', rwidth = 0.95)
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Hist')
+plt.show()
+
+plt.figure(figsize = (12,12))
+plt.scatter(wine.citric_acid, wine.fixed_acidity,color = 'k', s = 10, marker = '+')
+plt.xlabel('Citric Acid')
+plt.ylabel('Fixed Acidity')
+plt.show()
+
+plt.stackplot(wine.alcohol,wine.pH,wine.chlorides, colors=['m'])
+plt.legend()
+
+sns.distplot(wine.alcohol)
+sns.distplot(wine.alcohol, bins = 20, color = 'r')
+sns.distplot(wine.alcohol, bins = 20, color = 'r', kde=False)
+sns.distplot(wine.alcohol, bins = 20, color = 'r', kde=False, rug =True)
+sns.distplot(wine.alcohol, bins = 20, color = 'r', kde=True)
+
+sns.rugplot(wine.alcohol)
+
+sns.jointplot(wine.free_sulfur_dioxide, wine.total_sulfur_dioxide, kind = 'kde',xlim = {0,150}, ylim = {0,250} )
+
+sns.pairplot(wine)
+sns.pairplot(wine, vars = [ 'fixed_acidity','volatile_acidity', 'citric_acid','residual_sugar'])
+sns.pairplot(wine, vars = [ 'fixed_acidity','volatile_acidity', 'citric_acid','residual_sugar'], diag_kind = 'kde')
+sns.pairplot(wine, size = 3, vars = [ 'fixed_acidity','volatile_acidity', 'citric_acid','residual_sugar'], diag_kind = 'kde' ,kind = 'reg')
+sns.pairplot(wine, size = 3, vars = [ 'fixed_acidity','volatile_acidity', 'citric_acid','residual_sugar'], hue = 'pH')
+
+corrmat = wine.corr()
+sns.heatmap(corrmat, vmax = 0.8, square = True, annot = True)
+
+sns.lmplot(x='residual_sugar', y = 'density', data = wine, aspect = 1)
+sns.lmplot(x='quality', y = 'alcohol', data = wine, x_jitter = 0.1)
+sns.lmplot(x='quality', y = 'alcohol', data = wine, x_jitter = 0.1, x_estimator = np.mean)
+sns.lmplot(x= 'pH', y = 'fixed_acidity', data = wine, col = 'quality', hue = 'alcohol')
+
+sns.regplot(x= wine.quality, y = wine.alcohol)
+
+sns.stripplot(x='alcohol', y='quality', data = wine)
+sns.stripplot(x= wine.quality, y = wine.alcohol, jitter = True)
+
+sns.swarmplot(x='quality', y = 'alcohol', data = wine, hue  = 'pH')
+
+sns.boxplot(x = 'quality', y = 'alcohol', data = wine)
+
+sns.violinplot(x='quality', y = 'alcohol', data = wine)
+sns.violinplot(x='quality', y = 'alcohol', data = wine, bw = 1, scale = 'count')
+
+f, ax = plt.subplots(figsize = (5,15))
+sns.violinplot(x='quality', y = 'alcohol', data = wine, inner = None)
+sns.swarmplot(x='quality', y = 'alcohol', data = wine)
+
+sns.barplot(x= 'alcohol', y = 'quality',data = wine)
+
+sns.countplot(x = 'quality', data = wine)
+
+sns.pointplot(x= 'quality', y = 'pH',data = wine)
+
+sns.boxplot(data = wine, orient = 'h')
+
+sns.factorplot(x='fixed_acidity', y = 'pH', data = wine, col = 'quality', kind = 'swarm')
+
+g = sns.FacetGrid(wine, col = "Quality", size = 2.2, aspect = 1.6)
+g.map(plt.hist, wine.pH, alpha = 0.5, bins = 20)
+g.map(plt.barplot, wine.alcohol, wine.quality, alpha = 0.5)
